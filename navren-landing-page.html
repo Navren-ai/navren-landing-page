@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Navren — Your AI operating partner</title>
+  <meta name="description" content="Navren is your AI operating partner: one persistent operator that understands your priorities, coordinates your tools, and keeps work moving.">
+  <meta property="og:title" content="Navren — Work, orchestrated.">
+  <meta property="og:description" content="One persistent AI operator for the work that crosses tools, channels, and projects.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://navren.ai/">
+  <meta property="og:image" content="https://navren.ai/assets/navren-open-graph-1200x630.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Navren — Work, orchestrated.">
+  <meta name="twitter:description" content="Your AI operating partner.">
+  <meta name="twitter:image" content="https://navren.ai/assets/navren-open-graph-1200x630.png">
+  <link rel="canonical" href="https://navren.ai/">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/navren-favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/navren-app-icon-512.png">
+  <meta name="theme-color" content="#0A0D0C">
+  <style>
+    :root {
+      --carbon: #0A0D0C;
+      --carbon-2: #121713;
+      --carbon-3: #1D241F;
+      --bone: #F3F0E8;
+      --muted: #A7B0AA;
+      --signal: #C7FF4A;
+      --signal-dark: #1B250A;
+      --line: #2B332E;
+      --max: 1200px;
+      --radius: 28px;
+      --font: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--carbon); }
+    body { margin: 0; color: var(--bone); background: var(--carbon); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    .wrap { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
+    .nav { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--carbon) 90%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent); backdrop-filter: blur(16px); }
+    .nav-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 650; font-size: 22px; letter-spacing: -.5px; }
+    .brand svg { width: 36px; height: 36px; flex: none; }
+    .nav-links { display: flex; align-items: center; gap: 26px; color: var(--muted); font-size: 14px; font-weight: 550; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--bone); }
+    .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; padding: 0 20px; border: 1px solid var(--line); border-radius: 999px; font-weight: 650; font-size: 15px; transition: transform .2s ease, background .2s ease, border-color .2s ease; }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--signal); color: var(--carbon); border-color: var(--signal); }
+    .button-secondary { background: transparent; color: var(--bone); }
+    .hero { padding: 94px 0 74px; overflow: hidden; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--signal); font-size: 13px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--signal); }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 52px; align-items: center; }
+    h1 { max-width: 620px; margin: 25px 0 26px; font-size: clamp(64px, 5.2vw, 90px); line-height: .92; letter-spacing: -.072em; font-weight: 620; }
+    .lede { max-width: 590px; margin: 0; color: #C1C7C3; font-size: clamp(19px, 2vw, 24px); line-height: 1.5; letter-spacing: -.02em; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 38px; }
+    .hero-note { margin-top: 18px; color: #7F8A83; font-size: 13px; }
+    .operator { position: relative; min-height: 660px; border: 1px solid var(--line); border-radius: 42px; background: #0E120F; padding: 18px; box-shadow: 0 40px 100px rgba(0,0,0,.38); transform: rotate(1deg); }
+    .operator::before { content: ""; position: absolute; inset: -70px -60px; background-image: radial-gradient(circle, rgba(199,255,74,.18) 1px, transparent 1px); background-size: 22px 22px; mask-image: radial-gradient(circle, black 0, transparent 65%); z-index: -1; }
+    .operator-bar { display: flex; align-items: center; justify-content: space-between; height: 52px; padding: 0 14px; color: var(--muted); font-size: 12px; }
+    .operator-status { display: inline-flex; align-items: center; gap: 8px; }
+    .operator-status i { width: 8px; height: 8px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 0 5px rgba(199,255,74,.08); }
+    .thread { background: #151A17; border: 1px solid #252C28; border-radius: 28px; min-height: 570px; padding: 26px; display: flex; flex-direction: column; gap: 18px; }
+    .message { max-width: 84%; border-radius: 20px; padding: 17px 18px; font-size: 15px; line-height: 1.5; }
+    .message-user { align-self: flex-end; background: var(--bone); color: var(--carbon); border-bottom-right-radius: 6px; }
+    .message-navren { align-self: flex-start; background: #202722; border: 1px solid #303A33; color: #E7E9E5; border-bottom-left-radius: 6px; }
+    .task-stack { display: grid; gap: 9px; margin-top: 12px; }
+    .task { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 11px; padding: 12px; background: #101411; border: 1px solid #2B342E; border-radius: 13px; color: #C8CEC9; font-size: 13px; }
+    .task-icon { display: grid; place-items: center; width: 28px; height: 28px; background: var(--signal-dark); color: var(--signal); border-radius: 8px; font-size: 12px; font-weight: 800; }
+    .task-state { color: var(--signal); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+    .operator-input { margin-top: auto; display: flex; align-items: center; justify-content: space-between; background: #0D100E; border: 1px solid #343D37; border-radius: 17px; padding: 15px 16px; color: #7C8780; font-size: 13px; }
+    .operator-input span:last-child { display: grid; place-items: center; width: 34px; height: 34px; color: var(--carbon); background: var(--signal); border-radius: 10px; font-weight: 800; }
+    section { border-top: 1px solid var(--line); }
+    .section-pad { padding: 118px 0; }
+    .section-kicker { margin: 0 0 24px; color: var(--signal); font-size: 13px; font-weight: 750; letter-spacing: 1.8px; text-transform: uppercase; }
+    h2 { max-width: 980px; margin: 0; font-size: clamp(45px, 6vw, 82px); line-height: 1; letter-spacing: -.055em; font-weight: 610; }
+    .section-intro { max-width: 680px; margin: 28px 0 0; color: var(--muted); font-size: 19px; line-height: 1.6; }
+    .flow { margin-top: 74px; display: grid; grid-template-columns: 260px 1fr; gap: 80px; }
+    .flow-rail { position: relative; padding-left: 30px; }
+    .flow-rail::before { content: ""; position: absolute; left: 6px; top: 12px; bottom: 12px; width: 2px; background: var(--line); }
+    .flow-step { position: relative; min-height: 190px; }
+    .flow-step::before { content: ""; position: absolute; left: -30px; top: 8px; width: 14px; height: 14px; background: var(--carbon); border: 3px solid var(--signal); border-radius: 4px; }
+    .flow-step b { color: var(--signal); font-size: 12px; letter-spacing: 1.5px; }
+    .flow-step h3 { margin: 12px 0 8px; font-size: 24px; letter-spacing: -.03em; }
+    .flow-step p { color: var(--muted); line-height: 1.55; font-size: 15px; }
+    .flow-stage { position: sticky; top: 110px; align-self: start; min-height: 620px; border-radius: 36px; background: var(--bone); color: var(--carbon); padding: 54px; overflow: hidden; }
+    .flow-stage h3 { max-width: 620px; margin: 0; font-size: clamp(38px, 4.5vw, 68px); line-height: 1; letter-spacing: -.05em; }
+    .flow-stage p { max-width: 610px; font-size: 18px; line-height: 1.55; color: #4C5750; }
+    .route-map { position: absolute; inset: auto -50px -80px 80px; height: 310px; }
+    .route-map svg { width: 100%; height: 100%; }
+    .role-list { margin-top: 64px; border-top: 1px solid var(--line); }
+    .role { display: grid; grid-template-columns: 80px 1fr minmax(260px, .75fr); gap: 30px; align-items: center; padding: 32px 0; border-bottom: 1px solid var(--line); }
+    .role-num { color: var(--signal); font-size: 13px; font-weight: 800; letter-spacing: 1px; }
+    .role h3 { margin: 0; font-size: clamp(26px, 3vw, 42px); letter-spacing: -.04em; font-weight: 580; }
+    .role p { margin: 0; color: var(--muted); line-height: 1.55; }
+    .control { background: var(--bone); color: var(--carbon); }
+    .control .section-kicker { color: #486300; }
+    .control-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 90px; align-items: start; }
+    .control h2 { max-width: 700px; }
+    .control p { color: #4C5750; }
+    .principles { border-top: 1px solid #CAD0C9; }
+    .principle { padding: 25px 0; border-bottom: 1px solid #CAD0C9; display: grid; grid-template-columns: 36px 1fr; gap: 18px; }
+    .principle span { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 7px; background: var(--carbon); color: var(--signal); font-size: 12px; font-weight: 800; }
+    .principle h3 { margin: 0 0 5px; font-size: 18px; }
+    .principle p { margin: 0; font-size: 14px; line-height: 1.5; }
+    .faq { max-width: 900px; margin-top: 60px; }
+    details { border-top: 1px solid var(--line); }
+    details:last-child { border-bottom: 1px solid var(--line); }
+    summary { position: relative; cursor: pointer; list-style: none; padding: 27px 50px 27px 0; font-size: 21px; font-weight: 580; letter-spacing: -.02em; }
+    summary::-webkit-details-marker { display:none; }
+    summary::after { content: "+"; position: absolute; right: 4px; color: var(--signal); font-size: 28px; font-weight: 400; }
+    details[open] summary::after { content: "−"; }
+    details p { max-width: 740px; margin: -6px 0 28px; color: var(--muted); font-size: 16px; line-height: 1.65; }
+    .final { text-align: center; padding: 136px 0 80px; }
+    .final-mark { width: 88px; height: 88px; margin: 0 auto 32px; }
+    .final h2 { margin-inline: auto; font-size: clamp(66px, 9vw, 126px); }
+    .final p { max-width: 600px; margin: 28px auto 36px; color: var(--muted); font-size: 19px; line-height: 1.55; }
+
+    .footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid var(--line); padding: 28px 0 40px; color: #778179; font-size: 13px; }
+    .footer-links { display: flex; gap: 22px; }
+    :focus-visible { outline: 3px solid var(--signal); outline-offset: 4px; }
+    @media (max-width: 980px) {
+      .nav-links a:not(.button) { display: none; }
+      .hero { padding-top: 68px; }
+      .hero-grid, .control-grid { grid-template-columns: 1fr; }
+      .operator { min-height: 610px; transform: none; }
+      .flow { grid-template-columns: 1fr; }
+      .flow-rail { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; padding: 0; }
+      .flow-rail::before, .flow-step::before { display:none; }
+      .flow-step { min-height: auto; }
+      .flow-stage { position: relative; top: 0; }
+      .role { grid-template-columns: 50px 1fr; }
+      .role p { grid-column: 2; }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: min(calc(100% - 28px), var(--max)); }
+      .nav-inner { min-height: 66px; }
+      .brand { font-size: 19px; }
+      .nav .button { min-height: 40px; padding-inline: 14px; font-size: 13px; }
+      .hero { padding: 58px 0; }
+      h1 { font-size: clamp(52px, 16vw, 68px); letter-spacing: -.066em; }
+      .hero-note { max-width: 320px; line-height: 1.5; }
+      .operator { padding: 8px; border-radius: 28px; min-height: 590px; }
+      .thread { padding: 17px; border-radius: 22px; }
+      .message { max-width: 94%; }
+      .section-pad { padding: 84px 0; }
+      .flow-rail { grid-template-columns: 1fr; }
+      .flow-stage { min-height: 530px; padding: 32px; }
+      .role { grid-template-columns: 38px 1fr; gap: 15px; }
+
+      .footer { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="Navren home">
+        <svg viewBox="0 0 1024 1024" aria-hidden="true">
+          <rect width="1024" height="1024" rx="224" fill="#0A0D0C"/>
+          <path d="M270 728V296h132l220 259V296h132v432H622L402 469v259z" fill="#F3F0E8"/>
+          <path d="M402 469l220 259h-95L402 579z" fill="#B9B6AE"/>
+          <path d="M622 555l132-155v131L622 686z" fill="#C7FF4A"/>
+        </svg>
+        Navren
+      </a>
+      <div class="nav-links">
+        <a href="#how">How it works</a>
+        <a href="#roles">What Navren handles</a>
+        <a href="#control">Control</a>
+        <a class="button button-primary" href="#roles">What Navren handles</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <header class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Your AI operating partner</div>
+          <h1>Work,<br>orchestrated.</h1>
+          <p class="lede">Navren is one persistent operator for the work that crosses tools, channels, and projects. Give it the outcome. Navren coordinates the moving parts and keeps you in control.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#roles">What Navren handles</a>
+            <a class="button button-secondary" href="#how">See how Navren works</a>
+          </div>
+        </div>
+
+        <div class="operator" aria-label="Illustrative Navren operator conversation">
+          <div class="operator-bar"><span>Navren / Launch workspace</span><span class="operator-status"><i></i> Operating</span></div>
+          <div class="thread">
+            <div class="message message-user">Prepare next week’s launch. I need the positioning tightened, campaign assets organized, and the team briefed by Monday.</div>
+            <div class="message message-navren">
+              I’ve mapped the work into one operating plan. I’ll bring you the two decisions that need your judgment; the rest can move in parallel.
+              <div class="task-stack">
+                <div class="task"><span class="task-icon">01</span><span>Review current positioning and open questions</span><span class="task-state">Running</span></div>
+                <div class="task"><span class="task-icon">02</span><span>Organize campaign assets by channel and owner</span><span class="task-state">Queued</span></div>
+                <div class="task"><span class="task-icon">03</span><span>Draft Monday briefing with decisions and next steps</span><span class="task-state">Queued</span></div>
+              </div>
+            </div>
+            <div class="operator-input"><span>Give Navren an outcome...</span><span>↗</span></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="how">
+      <div class="wrap section-pad">
+        <p class="section-kicker">How Navren works</p>
+        <h2>One outcome in. Coordinated work out.</h2>
+        <p class="section-intro">Most work does not live in one app. Navren keeps the objective intact while the work moves between research, communication, files, schedules, and follow-up.</p>
+        <div class="flow">
+          <div class="flow-rail">
+            <div class="flow-step"><b>01 / DIRECT</b><h3>State the outcome</h3><p>Talk to Navren the way you would brief a trusted operator. Start with what needs to be true when the work is finished.</p></div>
+            <div class="flow-step"><b>02 / ORCHESTRATE</b><h3>Let the work branch</h3><p>Navren builds the plan, coordinates the connected work, and returns when a decision or approval needs you.</p></div>
+            <div class="flow-step"><b>03 / CLOSE</b><h3>Keep the loop closed</h3><p>You receive progress, evidence, and the finished output instead of another list of things to manage.</p></div>
+          </div>
+          <div class="flow-stage">
+            <p class="section-kicker">A persistent operating layer</p>
+            <h3>The objective survives every handoff.</h3>
+            <p>Navren remembers the reason behind the work, not only the last instruction. That context gives every action a direction and every update a purpose.</p>
+            <div class="route-map" aria-hidden="true">
+              <svg viewBox="0 0 800 320">
+                <path d="M20 265h180c78 0 107-165 199-165h128c70 0 92 69 151 69h110" fill="none" stroke="#0A0D0C" stroke-width="22" stroke-linecap="round"/>
+                <path d="M20 145h160c68 0 91 79 154 79h186c63 0 84-123 155-123h113" fill="none" stroke="#A6AEA8" stroke-width="11" stroke-linecap="round"/>
+                <rect x="372" y="73" width="56" height="56" rx="12" fill="#C7FF4A" stroke="#0A0D0C" stroke-width="10" transform="rotate(45 400 101)"/>
+                <path d="M734 135l66 34-66 34z" fill="#C7FF4A"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roles">
+      <div class="wrap section-pad">
+        <p class="section-kicker">What Navren handles</p>
+        <h2>A master operator for work that refuses to stay in one lane.</h2>
+        <div class="role-list">
+          <div class="role"><span class="role-num">01</span><h3>Research and decisions</h3><p>Gather the relevant context, compare options, expose uncertainty, and bring you a recommendation worth deciding on.</p></div>
+          <div class="role"><span class="role-num">02</span><h3>Projects and follow-through</h3><p>Turn rough direction into a working plan, track what changed, and keep commitments from quietly disappearing.</p></div>
+          <div class="role"><span class="role-num">03</span><h3>Communication</h3><p>Prepare briefs, drafts, updates, and responses that reflect the objective and the people involved.</p></div>
+          <div class="role"><span class="role-num">04</span><h3>Content and campaigns</h3><p>Coordinate ideas, research, production steps, asset organization, and the feedback needed to ship consistently.</p></div>
+          <div class="role"><span class="role-num">05</span><h3>Recurring operations</h3><p>Carry repeatable work on a schedule, watch for changes, and surface exceptions instead of creating more dashboards to check.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="control" class="control">
+      <div class="wrap section-pad control-grid">
+        <div>
+          <p class="section-kicker">Control by design</p>
+          <h2>Delegation without disappearing.</h2>
+          <p class="section-intro">Navren is being designed to show its work, ask when judgment matters, and operate within the access you choose. You should know what happened, why it happened, and what requires your attention.</p>
+        </div>
+        <div class="principles">
+          <div class="principle"><span>1</span><div><h3>You choose the boundaries</h3><p>Connections, permissions, and operating rules should match the work you are comfortable delegating.</p></div></div>
+          <div class="principle"><span>2</span><div><h3>Decisions return to you</h3><p>Navren can prepare the path without pretending every decision belongs to automation.</p></div></div>
+          <div class="principle"><span>3</span><div><h3>Actions stay understandable</h3><p>Important work should produce a clear record of what changed and what evidence supported it.</p></div></div>
+          <div class="principle"><span>4</span><div><h3>Context compounds</h3><p>Navren should become more useful as it learns your priorities, operating preferences, and recurring work.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap section-pad">
+        <p class="section-kicker">Questions</p>
+        <h2>A new way to operate deserves clear answers.</h2>
+        <div class="faq">
+          <details><summary>What is Navren?</summary><p>Navren is an AI operating partner designed to understand an objective, coordinate work across connected tools and channels, and keep the operator informed as the work moves.</p></details>
+          <details><summary>Is Navren another chatbot?</summary><p>No. A chatbot is primarily built to answer messages. Navren is being designed around continuity, coordination, and follow-through. Conversation is the interface; completed work is the objective.</p></details>
+          <details><summary>Who is Navren for?</summary><p>Navren is designed for founders and operators whose work crosses projects, communication, research, content, and recurring business operations.</p></details>
+          <details><summary>Where does Navren work?</summary><p>Navren is designed to meet users in the tools and channels where their work already happens, while preserving one continuous operating context.</p></details>
+          <details><summary>How does Navren keep me in control?</summary><p>Navren makes plans, progress, approval points, and important actions visible. You set the objective and boundaries, and decisions that require your judgment return to you.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section id="meet-navren">
+      <div class="wrap final">
+        <svg class="final-mark" viewBox="0 0 1024 1024" aria-hidden="true">
+          <rect width="1024" height="1024" rx="224" fill="#C7FF4A"/>
+          <path d="M270 728V296h132l220 259V296h132v432H622L402 469v259z" fill="#0A0D0C"/>
+          <path d="M402 469l220 259h-95L402 579z" fill="#26322B"/>
+          <path d="M622 555l132-155v131L622 686z" fill="#F3F0E8"/>
+        </svg>
+        <p class="section-kicker">One operator across everything</p>
+        <h2>Put Navren to work.</h2>
+        <p>Start with the outcome. Navren organizes the work, coordinates the moving parts, and keeps the decisions that need you in view.</p>
+        <a class="button button-primary" href="#how">See how Navren works</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer">
+      <span>© <span id="year"></span> Navren. Work, orchestrated.</span>
+      <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="mailto:hello@navren.ai">hello@navren.ai</a></div>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
